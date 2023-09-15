@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using eShopSolution.Data.Extensions;
+using Microsoft.EntityFrameworkCore;
 using ShopFashion.Data.Configurations;
 using ShopFashion.Data.Entities;
 
@@ -11,6 +12,7 @@ namespace ShopFashion.Data.EF
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Configure using fluent API
             modelBuilder.ApplyConfiguration(new CartConfiguration());
             modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
@@ -24,6 +26,8 @@ namespace ShopFashion.Data.EF
             modelBuilder.ApplyConfiguration(new ProductTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new PromotionConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+            //Data seeding
+            modelBuilder.Seed();
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
