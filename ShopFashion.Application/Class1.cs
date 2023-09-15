@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ShopFashion.Application
+﻿namespace ShopFashion.Application
 {
     public class Class1
     {
