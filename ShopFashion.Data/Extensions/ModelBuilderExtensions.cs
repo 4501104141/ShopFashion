@@ -82,7 +82,5 @@ namespace eShopSolution.Data.Extensions
                 new ProductInCategory() { ProductId = 1, CategoryId = 1 }
                 );
         }
-
-
     }
 }

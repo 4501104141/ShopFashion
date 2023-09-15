@@ -13,12 +13,9 @@ namespace ShopFashion.Data.EF
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
-
             var connectionString = configuration.GetConnectionString("ShopFashion");
-
             var optionsBuilder = new DbContextOptionsBuilder<EShopDbContext>();
             optionsBuilder.UseSqlServer(connectionString);
-
             return new EShopDbContext(optionsBuilder.Options);
         }
     }
