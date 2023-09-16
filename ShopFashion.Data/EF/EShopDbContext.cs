@@ -1,4 +1,4 @@
-﻿using eShopSolution.Data.Extensions;
+﻿using ShopFahion.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 using ShopFashion.Data.Configurations;
 using ShopFashion.Data.Entities;
@@ -42,5 +42,6 @@ namespace ShopFashion.Data.EF
         public DbSet<ProductTranslation> ProductTranslations { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
     }
 }
