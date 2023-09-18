@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShopFahion.Utilities.Constants;
 using Microsoft.OpenApi.Models;
-using ShopFashion.Application.Common;
 
 namespace FashionShop.BackendApi
 {
@@ -28,8 +27,6 @@ namespace FashionShop.BackendApi
                 options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MainConnectionString)));
             services.AddControllers();
             //Declare DI
-            services.AddTransient<IManageProductService, ManageProductService>();
-            services.AddTransient<IStorageService, FileStorageService>();
             services.AddTransient<IPublicProductService, PublicProductService>();
             services.AddSwaggerGen(c =>
             {
