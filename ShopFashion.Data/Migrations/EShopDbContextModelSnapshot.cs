@@ -294,7 +294,7 @@ namespace ShopFashion.Data.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 9, 18, 22, 56, 28, 814, DateTimeKind.Local).AddTicks(5829));
+                        .HasDefaultValue(new DateTime(2023, 9, 16, 18, 47, 48, 384, DateTimeKind.Local).AddTicks(2142));
 
                     b.Property<string>("ShipAddress")
                         .IsRequired()
@@ -388,7 +388,7 @@ namespace ShopFashion.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 9, 18, 22, 56, 28, 830, DateTimeKind.Local).AddTicks(917),
+                            DateCreated = new DateTime(2023, 9, 16, 18, 47, 48, 398, DateTimeKind.Local).AddTicks(7959),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,
@@ -401,13 +401,10 @@ namespace ShopFashion.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Caption")
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -416,9 +413,7 @@ namespace ShopFashion.Data.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("ImagePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDefault")
                         .HasColumnType("bit");
