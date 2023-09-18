@@ -104,14 +104,12 @@ namespace ShopFashion.Application.Catalog.Products
             //2. filter
             if (!string.IsNullOrEmpty(request.Keyword))
                 query = query.Where(x => x.pt.Name.Contains(request.Keyword));
-
             if (request.CategoryIds.Count > 0)
             {
                 query = query.Where(p => request.CategoryIds.Contains(p.pic.CategoryId));
             }
             //3. Paging
             int totalRow = await query.CountAsync();
-
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .Select(x => new ProductViewModel()
@@ -130,7 +128,6 @@ namespace ShopFashion.Application.Catalog.Products
                     Stock = x.p.Stock,
                     ViewCount = x.p.ViewCount
                 }).ToListAsync();
-
             //4. Select and projection
             var pagedResult = new PagedResult<ProductViewModel>()
             {
