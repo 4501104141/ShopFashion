@@ -3,7 +3,7 @@ using ShopFashion.Data.Entities;
 using ShopFashion.Data.Enums;
 using System;
 
-namespace eShopSolution.Data.Extensions
+namespace ShopFahion.Data.Extensions
 {
     public static class ModelBuilderExtensions
     {
