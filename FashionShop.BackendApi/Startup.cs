@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShopFahion.Utilities.Constants;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Routing;
 
 namespace FashionShop.BackendApi
 {
@@ -25,13 +26,22 @@ namespace FashionShop.BackendApi
         {
             services.AddDbContext<EShopDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MainConnectionString)));
-            services.AddControllers();
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                    
+                });
+            //Format controller lower.
+            services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
+
             //Declare DI
             services.AddTransient<IPublicProductService, PublicProductService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger eShop Solution", Version = "v1", Description = "hihi" });
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
