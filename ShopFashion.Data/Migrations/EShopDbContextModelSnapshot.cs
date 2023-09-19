@@ -488,7 +488,7 @@ namespace ShopFashion.Data.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 9, 19, 22, 55, 11, 452, DateTimeKind.Local).AddTicks(8181));
+                        .HasDefaultValue(new DateTime(2023, 9, 20, 0, 1, 37, 623, DateTimeKind.Local).AddTicks(2483));
 
                     b.Property<string>("ShipAddress")
                         .IsRequired()
@@ -562,9 +562,6 @@ namespace ShopFashion.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("SeoAlias")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Stock")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
@@ -583,7 +580,7 @@ namespace ShopFashion.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 9, 19, 22, 55, 11, 454, DateTimeKind.Local).AddTicks(5883),
+                            DateCreated = new DateTime(2023, 9, 20, 0, 1, 37, 625, DateTimeKind.Local).AddTicks(377),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,

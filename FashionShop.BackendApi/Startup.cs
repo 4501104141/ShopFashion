@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShopFahion.Utilities.Constants;
 using Microsoft.OpenApi.Models;
+using eShopSolution.Application.Common;
+using ShopFashion.Application.Common;
 
 namespace FashionShop.BackendApi
 {
@@ -27,10 +29,12 @@ namespace FashionShop.BackendApi
                 options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MainConnectionString)));
             services.AddControllers();
             //Declare DI
+            services.AddTransient<IStorageService, FileStorageService>();
             services.AddTransient<IPublicProductService, PublicProductService>();
+            services.AddTransient<IManageProductService, ManageProductService>();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger eShop Solution", Version = "v1", Description = "hihi" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger ShopFashion", Version = "v1"});
             });
         }
 
