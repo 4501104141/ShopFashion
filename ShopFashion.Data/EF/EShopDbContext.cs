@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using ShopFahion.Data.Configurations;
-using ShopFahion.Data.Extensions;
 using ShopFashion.Data.Configurations;
 using ShopFashion.Data.Entities;
+using ShopFashion.Data.Extensions;
 using System;
 
 namespace ShopFashion.Data.EF
