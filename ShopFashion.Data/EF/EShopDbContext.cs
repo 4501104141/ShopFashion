@@ -14,6 +14,7 @@ namespace ShopFashion.Data.EF
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Configure using fluent API
+            modelBuilder.ApplyConfiguration(new ProductImageConfiguration());
             modelBuilder.ApplyConfiguration(new CartConfiguration());
             modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
@@ -27,7 +28,6 @@ namespace ShopFashion.Data.EF
             modelBuilder.ApplyConfiguration(new ProductTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new PromotionConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
-            modelBuilder.ApplyConfiguration(new ProductImageConfiguration());
             //Data seeding
             modelBuilder.Seed();
         }
@@ -44,6 +44,6 @@ namespace ShopFashion.Data.EF
         public DbSet<ProductTranslation> ProductTranslations { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<ProductImage> ProductImagesee { get; set; }
     }
 }

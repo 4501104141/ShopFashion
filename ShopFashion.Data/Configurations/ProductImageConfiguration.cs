@@ -1,6 +1,6 @@
-﻿using ShopFashion.Data.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using ShopFashion.Data.Entities;
 
 namespace ShopFahion.Data.Configurations
 {
