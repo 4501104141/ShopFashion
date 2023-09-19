@@ -1,27 +1,29 @@
-﻿using ShopFashion.Data.EF;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using ShopFahion.ViewModels.Catalog.Products;
 using ShopFahion.ViewModels.Common;
+using ShopFashion.Data.EF;
+using ShopFashion.ViewModels.Catalog.Products;
 
 namespace ShopFashion.Application.Catalog.Products
 {
     public class PublicProductService : IPublicProductService
     {
         private readonly EShopDbContext _context;
+
         public PublicProductService(EShopDbContext context)
         {
             _context = context;
         }
 
-        public async Task<List<ProductViewModel>> GetAll()
+        public async Task<List<ProductViewModel>> GetAll(string languageId)
         {
             var query = from p in _context.Products
                         join pt in _context.ProductTranslations on p.Id equals pt.ProductId
                         join pic in _context.ProductInCategories on p.Id equals pic.ProductId
                         join c in _context.Categories on pic.CategoryId equals c.Id
+                        where pt.LanguageId == languageId
                         select new { p, pt, pic };
             var data = await query.Select(x => new ProductViewModel()
             {
@@ -49,6 +51,7 @@ namespace ShopFashion.Application.Catalog.Products
                         join pt in _context.ProductTranslations on p.Id equals pt.ProductId
                         join pic in _context.ProductInCategories on p.Id equals pic.ProductId
                         join c in _context.Categories on pic.CategoryId equals c.Id
+                        where pt.LanguageId == request.LanguageId
                         select new { p, pt, pic };
             //2. filter
             if (request.CategoryId.HasValue && request.CategoryId.Value > 0)
