@@ -2,18 +2,17 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ShopFashion.Data.Entities;
 
-namespace ShopFashion.Data.Configurations
+namespace ShopFashion.Data.Configurations;
+
+public class ProductInCategoryConfiguration : IEntityTypeConfiguration<ProductInCategory>
 {
-    public class ProductInCategoryConfiguration : IEntityTypeConfiguration<ProductInCategory>
+    public void Configure(EntityTypeBuilder<ProductInCategory> builder)
     {
-        public void Configure(EntityTypeBuilder<ProductInCategory> builder)
-        {
-            builder.HasKey(t => new { t.CategoryId, t.ProductId });
-            builder.ToTable("ProductInCategories");
-            builder.HasOne(t => t.Product).WithMany(pc => pc.ProductInCategories)
-                .HasForeignKey(pc => pc.ProductId);
-            builder.HasOne(t => t.Category).WithMany(pc => pc.ProductInCategories)
-              .HasForeignKey(pc => pc.CategoryId);
-        }
+        builder.HasKey(t => new { t.CategoryId, t.ProductId });
+        builder.ToTable("ProductInCategories");
+        builder.HasOne(t => t.Product).WithMany(pc => pc.ProductInCategories)
+            .HasForeignKey(pc => pc.ProductId);
+        builder.HasOne(t => t.Category).WithMany(pc => pc.ProductInCategories)
+          .HasForeignKey(pc => pc.CategoryId);
     }
 }

@@ -1,8 +1,7 @@
-﻿namespace ShopFashion.Data.Enums
+﻿namespace ShopFashion.Data.Enums;
+
+public enum TransactionStatus
 {
-    public enum TransactionStatus
-    {
-        Success,
-        Failed
-    }
+    Success,
+    Failed
 }

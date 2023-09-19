@@ -1,10 +1,9 @@
-﻿using ShopFahion.ViewModels.Common;
+﻿using ShopFashion.ViewModels.Common;
 
-namespace ShopFashion.ViewModels.Catalog.Products
+namespace ShopFashion.ViewModels.Catalog.Products;
+
+public class GetPublicProductPagingRequest : PagingRequestBase
 {
-    public class GetPublicProductPagingRequest : PagingRequestBase
-    {
-        public string LanguageId { get; set; }
-        public int? CategoryId { get; set; }
-    }
+    public string LanguageId { get; set; }
+    public int? CategoryId { get; set; }
 }

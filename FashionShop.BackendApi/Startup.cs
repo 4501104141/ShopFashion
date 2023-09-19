@@ -1,64 +1,63 @@
-using ShopFashion.Application.Catalog.Products;
-using ShopFashion.Data.EF;
+using eShopSolution.Application.Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ShopFahion.Utilities.Constants;
 using Microsoft.OpenApi.Models;
-using eShopSolution.Application.Common;
+using ShopFahion.Utilities.Constants;
+using ShopFashion.Application.Catalog.Products;
 using ShopFashion.Application.Common;
+using ShopFashion.Data.EF;
 
-namespace FashionShop.BackendApi
+namespace FashionShop.BackendApi;
+
+public class Startup
 {
-    public class Startup
+    public Startup(IConfiguration configuration)
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        Configuration = configuration;
+    }
 
-        public IConfiguration Configuration { get; }
+    public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+    // This method gets called by the runtime. Use this method to add services to the container.
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddDbContext<EShopDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MainConnectionString)));
+        services.AddControllers();
+        //Declare DI
+        services.AddTransient<IStorageService, FileStorageService>();
+        services.AddTransient<IPublicProductService, PublicProductService>();
+        services.AddTransient<IManageProductService, ManageProductService>();
+        services.AddSwaggerGen(c =>
         {
-            services.AddDbContext<EShopDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MainConnectionString)));
-            services.AddControllers();
-            //Declare DI
-            services.AddTransient<IStorageService, FileStorageService>();
-            services.AddTransient<IPublicProductService, PublicProductService>();
-            services.AddTransient<IManageProductService, ManageProductService>();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger ShopFashion", Version = "v1"});
-            });
-        }
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger ShopFashion", Version = "v1" });
+        });
+    }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        if (env.IsDevelopment())
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            app.UseHttpsRedirection();
-            app.UseRouting();
-            app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger ShopFashion V1");
-            });
+            app.UseDeveloperExceptionPage();
         }
+        app.UseHttpsRedirection();
+        app.UseRouting();
+        app.UseAuthorization();
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+        });
+        app.UseSwagger();
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger ShopFashion V1");
+        });
     }
 }

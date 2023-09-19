@@ -1,21 +1,20 @@
 ﻿using System;
 
-namespace ShopFahion.Utilities.Exceptions
+namespace ShopFahion.Utilities.Exceptions;
+
+public class EShopException : Exception
 {
-    public class EShopException : Exception
+    public EShopException()
     {
-        public EShopException()
-        {
-        }
+    }
 
-        public EShopException(string message)
-            : base(message)
-        {
-        }
+    public EShopException(string message)
+        : base(message)
+    {
+    }
 
-        public EShopException(string message, Exception inner)
-            : base(message, inner)
-        {
-        }
+    public EShopException(string message, Exception inner)
+        : base(message, inner)
+    {
     }
 }

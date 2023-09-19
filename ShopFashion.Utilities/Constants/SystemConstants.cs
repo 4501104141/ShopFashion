@@ -1,8 +1,7 @@
 ﻿
-namespace ShopFahion.Utilities.Constants
+namespace ShopFahion.Utilities.Constants;
+
+public class SystemConstants
 {
-    public class SystemConstants
-    {
-        public const string MainConnectionString = "ShopFashionDB";
-    }
+    public const string MainConnectionString = "ShopFashionDB";
 }

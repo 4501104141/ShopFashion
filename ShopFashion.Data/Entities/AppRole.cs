@@ -1,10 +1,9 @@
-﻿using System;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 
-namespace ShopFashion.Data.Entities
+namespace ShopFashion.Data.Entities;
+
+public class AppRole : IdentityRole<Guid>
 {
-    public class AppRole : IdentityRole<Guid>
-    {
-        public string Description { get; set; }
-    }
+    public string Description { get; set; }
 }

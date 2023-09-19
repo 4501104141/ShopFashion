@@ -1,12 +1,11 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 
-namespace ShopFashion.Application.Common
+namespace ShopFashion.Application.Common;
+
+public interface IStorageService
 {
-    public interface IStorageService
-    {
-        string GetFileUrl(string fileName);
-        Task SaveFileAsync(Stream mediaBinaryStream, string fileName);
-        Task DeleteFileAsync(string fileName);
-    }
+    string GetFileUrl(string fileName);
+    Task SaveFileAsync(Stream mediaBinaryStream, string fileName);
+    Task DeleteFileAsync(string fileName);
 }

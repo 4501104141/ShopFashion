@@ -1,7 +1,7 @@
-﻿using ShopFashion.Application.Catalog.Products;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
+using ShopFashion.Application.Catalog.Products;
 using ShopFashion.ViewModels.Catalog.Products;
+using System.Threading.Tasks;
 
 namespace ShopFashion.BackendApi.Controllers;
 

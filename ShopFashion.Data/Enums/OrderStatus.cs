@@ -1,11 +1,10 @@
-﻿namespace ShopFashion.Data.Enums
+﻿namespace ShopFashion.Data.Enums;
+
+public enum OrderStatus
 {
-    public enum OrderStatus
-    {
-        InProgress,
-        Confirmed,
-        Shipping,
-        Success,
-        Canceled
-    }
+    InProgress,
+    Confirmed,
+    Shipping,
+    Success,
+    Canceled
 }

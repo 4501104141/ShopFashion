@@ -1,13 +1,12 @@
-﻿using ShopFahion.ViewModels.Common;
-using ShopFashion.ViewModels.Catalog.Products;
+﻿using ShopFashion.ViewModels.Catalog.Products;
+using ShopFashion.ViewModels.Common;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ShopFashion.Application.Catalog.Products
+namespace ShopFashion.Application.Catalog.Products;
+
+public interface IPublicProductService
 {
-    public interface IPublicProductService
-    {
-        Task<PagedResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request);
-        Task<List<ProductViewModel>> GetAll(string languageId);
-    }
+    Task<PagedResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request);
+    Task<List<ProductViewModel>> GetAll(string languageId);
 }
