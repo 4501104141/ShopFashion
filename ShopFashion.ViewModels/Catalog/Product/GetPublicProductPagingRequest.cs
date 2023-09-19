@@ -1,9 +1,10 @@
 ﻿using ShopFahion.ViewModels.Common;
 
-namespace ShopFahion.ViewModels.Catalog.Products
+namespace ShopFashion.ViewModels.Catalog.Products
 {
     public class GetPublicProductPagingRequest : PagingRequestBase
     {
+        public string LanguageId { get; set; }
         public int? CategoryId { get; set; }
     }
 }

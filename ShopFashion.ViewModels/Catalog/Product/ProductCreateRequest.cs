@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace ShopFahion.ViewModels.Catalog.Products
+namespace ShopFashion.ViewModels.Catalog.Products
 {
     public class ProductCreateRequest
     {

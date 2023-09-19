@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ShopFashion.Data.Entities;
 
-namespace ShopFahion.Data.Configurations
+namespace ShopFashion.Data.Configurations
 {
     public class ProductImageConfiguration : IEntityTypeConfiguration<ProductImage>
     {

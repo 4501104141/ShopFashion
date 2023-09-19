@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ShopFahion.ViewModels.Catalog.Products
+namespace ShopFashion.ViewModels.Catalog.Products
 {
     public class ProductViewModel
     {

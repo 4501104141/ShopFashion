@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
+using ShopFahion.ViewModels.Common;
+using ShopFashion.ViewModels.Catalog.Products;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ShopFahion.ViewModels.Catalog.Products;
-using ShopFahion.ViewModels.Common;
 
 namespace ShopFashion.Application.Catalog.Products
 {
@@ -11,6 +11,7 @@ namespace ShopFashion.Application.Catalog.Products
         Task<int> Create(ProductCreateRequest request);
         Task<int> Update(ProductUpdateRequest request);
         Task<int> Delete(int productId);
+        Task<ProductViewModel> GetById(int productId, string languageId);
         Task<bool> UpdatePrice(int productId, decimal newPrice);
         Task<bool> UpdateStock(int productId, int addedQuantity);
         Task AddViewcount(int productId);

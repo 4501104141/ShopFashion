@@ -1,7 +1,7 @@
 ﻿using ShopFahion.ViewModels.Common;
 using System.Collections.Generic;
 
-namespace ShopFahion.ViewModels.Catalog.Products
+namespace ShopFashion.ViewModels.Catalog.Products
 {
     public class GetManageProductPagingRequest : PagingRequestBase
     {
