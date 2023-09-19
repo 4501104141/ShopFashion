@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using ShopFashion.Data.Configurations;
 using ShopFashion.Data.Entities;
-using ShopFahion.Data.Configurations;
 
 namespace ShopFashion.Data.EF
 {
