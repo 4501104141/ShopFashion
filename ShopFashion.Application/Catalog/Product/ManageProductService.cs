@@ -272,7 +272,6 @@ public class ManageProductService : IManageProductService
             productImage.ImagePath = await this.SaveFile(request.ImageFile);
             productImage.FileSize = request.ImageFile.Length;
         }
-        _context.ProductImages.Update(productImage);
         return await _context.SaveChangesAsync();
     }
 
