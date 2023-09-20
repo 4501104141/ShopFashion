@@ -1,6 +1,7 @@
 using eShopSolution.Application.Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,7 +10,9 @@ using Microsoft.OpenApi.Models;
 using ShopFahion.Utilities.Constants;
 using ShopFashion.Application.Catalog.Products;
 using ShopFashion.Application.Common;
+using ShopFashion.Application.System.Users;
 using ShopFashion.Data.EF;
+using ShopFashion.Data.Entities;
 
 namespace FashionShop.BackendApi;
 
@@ -29,6 +32,13 @@ public class Startup
             options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MainConnectionString)));
         services.AddControllers();
         //Declare DI
+        services.AddIdentity<AppUser, AppRole>()
+                .AddEntityFrameworkStores<EShopDbContext>()
+                .AddDefaultTokenProviders();
+        services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
+        services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
+        services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
+        services.AddTransient<IUserService, UserService>();
         services.AddTransient<IStorageService, FileStorageService>();
         services.AddTransient<IPublicProductService, PublicProductService>();
         services.AddTransient<IManageProductService, ManageProductService>();
