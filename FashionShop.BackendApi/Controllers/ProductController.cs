@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ShopFashion.Application.Catalog.Products;
 using ShopFashion.ViewModels.Catalog.ProductImages;
 using ShopFashion.ViewModels.Catalog.Products;
@@ -8,6 +9,7 @@ namespace ShopFashion.BackendApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class ProductController : ControllerBase
 {
     private readonly IPublicProductService _publicProductService;
@@ -139,8 +141,8 @@ public class ProductController : ControllerBase
         return Ok();
     }
 
-    [HttpGet("{productId}/images/{imageId}")]
-    public async Task<IActionResult> GetImageById(int productId, int imageId)
+    [HttpGet("images/{imageId}")]
+    public async Task<IActionResult> GetImageById(int imageId)
     {
         var image = await _manageProductService.GetImageById(imageId);
         if (image == null)
