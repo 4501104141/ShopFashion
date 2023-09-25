@@ -14,14 +14,14 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-namespace ShopFashion.Application.Catalog.Products;
+namespace ShopFashion.Application.Catalog.Product;
 
-public class ManageProductService : IManageProductService
+public class ProductService : IProductService
 {
     private readonly EShopDbContext _context;
     private readonly IStorageService _storageService;
 
-    public ManageProductService(EShopDbContext context, IStorageService storageService)
+    public ProductService(EShopDbContext context, IStorageService storageService)
     {
         _context = context;
         _storageService = storageService;
@@ -56,7 +56,7 @@ public class ManageProductService : IManageProductService
 
     public async Task<int> Create(ProductCreateRequest request)
     {
-        var product = new Product()
+        var product = new Data.Entities.Product()
         {
             Price = request.Price,
             OriginalPrice = request.OriginalPrice,
@@ -110,7 +110,9 @@ public class ManageProductService : IManageProductService
         {
             await _storageService.DeleteFileAsync(image.ImagePath);
         }
+
         _context.Products.Remove(product);
+
         return await _context.SaveChangesAsync();
     }
 
@@ -133,7 +135,6 @@ public class ManageProductService : IManageProductService
         }
         //3. Paging
         int totalRow = await query.CountAsync();
-
         var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
             .Take(request.PageSize)
             .Select(x => new ProductViewModel()
@@ -152,6 +153,7 @@ public class ManageProductService : IManageProductService
                 Stock = x.p.Stock,
                 ViewCount = x.p.ViewCount
             }).ToListAsync();
+
         //4. Select and projection
         var pagedResult = new PagedResult<ProductViewModel>()
         {
@@ -164,7 +166,8 @@ public class ManageProductService : IManageProductService
     public async Task<ProductViewModel> GetById(int productId, string languageId)
     {
         var product = await _context.Products.FindAsync(productId);
-        var productTranslation = await _context.ProductTranslations.FirstOrDefaultAsync(x => x.ProductId == productId && x.LanguageId == languageId);
+        var productTranslation = await _context.ProductTranslations.FirstOrDefaultAsync(x => x.ProductId == productId
+        && x.LanguageId == languageId);
         var productViewModel = new ProductViewModel()
         {
             Id = product.Id,
@@ -208,26 +211,24 @@ public class ManageProductService : IManageProductService
     public async Task<List<ProductImageViewModel>> GetListImages(int productId)
     {
         return await _context.ProductImages.Where(x => x.ProductId == productId)
-                .Select(i => new ProductImageViewModel()
-                {
-                    Caption = i.Caption,
-                    DateCreated = i.DateCreated,
-                    FileSize = i.FileSize,
-                    Id = i.Id,
-                    ImagePath = i.ImagePath,
-                    IsDefault = i.IsDefault,
-                    ProductId = i.ProductId,
-                    SortOrder = i.SortOrder
-                }).ToListAsync();
+            .Select(i => new ProductImageViewModel()
+            {
+                Caption = i.Caption,
+                DateCreated = i.DateCreated,
+                FileSize = i.FileSize,
+                Id = i.Id,
+                ImagePath = i.ImagePath,
+                IsDefault = i.IsDefault,
+                ProductId = i.ProductId,
+                SortOrder = i.SortOrder
+            }).ToListAsync();
     }
 
     public async Task<int> RemoveImage(int imageId)
     {
         var productImage = await _context.ProductImages.FindAsync(imageId);
         if (productImage == null)
-        {
             throw new EShopException($"Cannot find an image with id {imageId}");
-        }
         _context.ProductImages.Remove(productImage);
         return await _context.SaveChangesAsync();
     }
@@ -235,11 +236,9 @@ public class ManageProductService : IManageProductService
     public async Task<int> Update(ProductUpdateRequest request)
     {
         var product = await _context.Products.FindAsync(request.Id);
-        var productTranslations = await _context.ProductTranslations.FirstOrDefaultAsync(x => x.ProductId == request.Id && x.LanguageId == request.LanguageId);
-        if (product == null || productTranslations == null)
-        {
-            throw new EShopException($"Cannot find a product with id: {request.Id}");
-        }
+        var productTranslations = await _context.ProductTranslations.FirstOrDefaultAsync(x => x.ProductId == request.Id
+        && x.LanguageId == request.LanguageId);
+        if (product == null || productTranslations == null) throw new EShopException($"Cannot find a product with id: {request.Id}");
         productTranslations.Name = request.Name;
         productTranslations.SeoAlias = request.SeoAlias;
         productTranslations.SeoDescription = request.SeoDescription;
@@ -264,7 +263,7 @@ public class ManageProductService : IManageProductService
     {
         var productImage = await _context.ProductImages.FindAsync(imageId);
         if (productImage == null)
-        {
+        { 
             throw new EShopException($"Cannot find an image with id {imageId}");
         }
         if (request.ImageFile != null)
@@ -272,16 +271,14 @@ public class ManageProductService : IManageProductService
             productImage.ImagePath = await this.SaveFile(request.ImageFile);
             productImage.FileSize = request.ImageFile.Length;
         }
+        _context.ProductImages.Update(productImage);
         return await _context.SaveChangesAsync();
     }
 
     public async Task<bool> UpdatePrice(int productId, decimal newPrice)
     {
         var product = await _context.Products.FindAsync(productId);
-        if (product == null)
-        {
-            throw new EShopException($"Cannot find a product with id: {productId}");
-        }
+        if (product == null) throw new EShopException($"Cannot find a product with id: {productId}");
         product.Price = newPrice;
         return await _context.SaveChangesAsync() > 0;
     }
@@ -303,5 +300,48 @@ public class ManageProductService : IManageProductService
         var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
         await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
         return fileName;
+    }
+
+    public async Task<PagedResult<ProductViewModel>> GetAllByCategoryId(string languageId, GetPublicProductPagingRequest request)
+    {
+        //1. Select join
+        var query = from p in _context.Products
+                    join pt in _context.ProductTranslations on p.Id equals pt.ProductId
+                    join pic in _context.ProductInCategories on p.Id equals pic.ProductId
+                    join c in _context.Categories on pic.CategoryId equals c.Id
+                    where pt.LanguageId == languageId
+                    select new { p, pt, pic };
+        //2. filter
+        if (request.CategoryId.HasValue && request.CategoryId.Value > 0)
+        {
+            query = query.Where(p => p.pic.CategoryId == request.CategoryId);
+        }
+        //3. Paging
+        int totalRow = await query.CountAsync();
+        var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
+            .Take(request.PageSize)
+            .Select(x => new ProductViewModel()
+            {
+                Id = x.p.Id,
+                Name = x.pt.Name,
+                DateCreated = x.p.DateCreated,
+                Description = x.pt.Description,
+                Details = x.pt.Details,
+                LanguageId = x.pt.LanguageId,
+                OriginalPrice = x.p.OriginalPrice,
+                Price = x.p.Price,
+                SeoAlias = x.pt.SeoAlias,
+                SeoDescription = x.pt.SeoDescription,
+                SeoTitle = x.pt.SeoTitle,
+                Stock = x.p.Stock,
+                ViewCount = x.p.ViewCount
+            }).ToListAsync();
+        //4. Select and projection
+        var pagedResult = new PagedResult<ProductViewModel>()
+        {
+            TotalRecord = totalRow,
+            Items = data
+        };
+        return pagedResult;
     }
 }

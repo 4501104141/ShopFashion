@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using ShopFashion.ViewModels.System.User;
 
 namespace ShopFashion.AdminApp.Controllers;
 
@@ -22,9 +23,18 @@ public class UserController : Controller
         _configuration = configuration;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 10)
     {
-        return View();
+        var sessions = HttpContext.Session.GetString("Token");
+        var request = new GetUserPagingRequest()
+        {
+            BearerToken = sessions,
+            Keyword = keyword,
+            PageIndex = pageIndex,
+            PageSize = pageSize
+        };
+        var data = await _userApiClient.GetUsersPagings(request);
+        return View(data);
     }
 
     [HttpGet]
@@ -38,6 +48,7 @@ public class UserController : Controller
     public async Task<IActionResult> Logout()
     {
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        HttpContext.Session.Remove("Token");
         return RedirectToAction("Login", "User");
     }
 
@@ -55,6 +66,7 @@ public class UserController : Controller
             ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
             IsPersistent = true
         };
+        HttpContext.Session.SetString("Token", token);
         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, userPrincipal,
             authProperties);
         return RedirectToAction("Index", "Home");

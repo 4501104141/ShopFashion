@@ -11,7 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ShopFahion.Utilities.Constants;
-using ShopFashion.Application.Catalog.Products;
+using ShopFashion.Application.Catalog.Product;
 using ShopFashion.Application.Common;
 using ShopFashion.Application.System.Users;
 using ShopFashion.Data.EF;
@@ -39,9 +39,8 @@ public class Startup
             .AddEntityFrameworkStores<EShopDbContext>()
             .AddDefaultTokenProviders();
         //Declare DI
+        services.AddTransient<IProductService, ProductService>();
         services.AddTransient<IStorageService, FileStorageService>();
-        services.AddTransient<IPublicProductService, PublicProductService>();
-        services.AddTransient<IManageProductService, ManageProductService>();
         services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
         services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
         services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
