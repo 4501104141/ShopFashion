@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopFashion.Utilities", "Sh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopFashion.BackendApi", "FashionShop.BackendApi\ShopFashion.BackendApi.csproj", "{831DD2F1-CB2D-4C5B-B136-4D1A6E178D1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopFashion.AdminApp", "ShopFashion.AdminApp\ShopFashion.AdminApp.csproj", "{BE182168-E058-43A8-B920-FE7FB2D5E402}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{831DD2F1-CB2D-4C5B-B136-4D1A6E178D1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{831DD2F1-CB2D-4C5B-B136-4D1A6E178D1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{831DD2F1-CB2D-4C5B-B136-4D1A6E178D1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE182168-E058-43A8-B920-FE7FB2D5E402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE182168-E058-43A8-B920-FE7FB2D5E402}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE182168-E058-43A8-B920-FE7FB2D5E402}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE182168-E058-43A8-B920-FE7FB2D5E402}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
