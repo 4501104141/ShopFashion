@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShopFashion.Application.System.Users;
+using ShopFashion.ViewModels.System.User;
 using ShopFashion.ViewModels.System.Users;
 
 namespace ShopFashion.BackendApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;
@@ -33,7 +35,7 @@ public class UsersController : ControllerBase
         return Ok(resultToken);
     }
 
-    [HttpPost("register")]
+    [HttpPost]
     [AllowAnonymous]
     public async Task<IActionResult> Register([FromBody] RegisterRequest request)
     {
@@ -47,5 +49,13 @@ public class UsersController : ControllerBase
             return BadRequest("Register is unsuccessful.");
         }
         return Ok();
+    }
+
+    //http://localhost/api/users/paging?pageIndex=1&pageSize=10&keyword=
+    [HttpGet("paging")]
+    public async Task<IActionResult> GetAllPaging([FromQuery] GetUserPagingRequest request)
+    {
+        var products = await _userService.GetUsersPaging(request);
+        return Ok(products);
     }
 }
