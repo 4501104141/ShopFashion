@@ -24,7 +24,7 @@ if (environment == Environments.Development)
 #endif
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
 {
-    options.LoginPath = "/User/Login/";
+    options.LoginPath = "/Login/Index";
     options.AccessDeniedPath = "/Account/Forbidden/";
 });
 var app = builder.Build();

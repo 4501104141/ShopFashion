@@ -12,7 +12,7 @@ using ShopFashion.ViewModels.System.User;
 
 namespace ShopFashion.AdminApp.Controllers;
 
-public class UserController : Controller
+public class UserController : BaseController
 {
     private readonly IUserApiClient _userApiClient;
     private readonly IConfiguration _configuration;
@@ -38,10 +38,24 @@ public class UserController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Login()
+    public IActionResult Create()
     {
-        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(RegisterRequest request)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View();
+        }
+        var result = await _userApiClient.RegisterUser(request);
+        if (result)
+        {
+            return RedirectToAction("Index");
+        } 
+        return View(request);
     }
 
     [HttpPost]
@@ -50,37 +64,5 @@ public class UserController : Controller
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         HttpContext.Session.Remove("Token");
         return RedirectToAction("Login", "User");
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Login(LoginRequest request)
-    {
-        if (!ModelState.IsValid)
-        {
-            return View(ModelState);
-        }
-        var token = await _userApiClient.Authenticate(request);
-        var userPrincipal = this.ValidateToken(token);
-        var authProperties = new AuthenticationProperties
-        {
-            ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
-            IsPersistent = true
-        };
-        HttpContext.Session.SetString("Token", token);
-        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, userPrincipal,
-            authProperties);
-        return RedirectToAction("Index", "Home");
-    }
-    private ClaimsPrincipal ValidateToken(string jwtToken)
-    {
-        IdentityModelEventSource.ShowPII = true;
-        SecurityToken validatedToken;
-        TokenValidationParameters validationParameters = new TokenValidationParameters();
-        validationParameters.ValidateLifetime = true;
-        validationParameters.ValidAudience = _configuration["Tokens:Issuer"];
-        validationParameters.ValidIssuer = _configuration["Tokens:Issuer"];
-        validationParameters.IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Tokens:Key"]));
-        ClaimsPrincipal principal = new JwtSecurityTokenHandler().ValidateToken(jwtToken, validationParameters, out validatedToken);
-        return principal;
     }
 }
