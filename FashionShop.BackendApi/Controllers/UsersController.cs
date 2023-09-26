@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShopFashion.Application.System.Users;
 using ShopFashion.ViewModels.System.User;
 using ShopFashion.ViewModels.System.Users;
+using System.Threading.Tasks;
 
 namespace ShopFashion.BackendApi.Controllers;
 
@@ -28,7 +28,7 @@ public class UsersController : ControllerBase
             return BadRequest(ModelState);
         }
         var resultToken = await _userService.Authencate(request);
-        if (string.IsNullOrEmpty(resultToken))
+        if (string.IsNullOrEmpty(resultToken.ResultObj))
         {
             return BadRequest("Username or password is incorrect.");
         }
@@ -44,7 +44,7 @@ public class UsersController : ControllerBase
             return BadRequest(ModelState);
         }
         var result = await _userService.Register(request);
-        if (!result)
+        if (!result.IsSuccessed)
         {
             return BadRequest("Register is unsuccessful.");
         }

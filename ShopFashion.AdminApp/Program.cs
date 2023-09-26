@@ -14,6 +14,7 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
 builder.Services.AddTransient<IUserApiClient, UserApiClient>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 IMvcBuilder builder1 = builder.Services.AddRazorPages();
 var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 #if DEBUG
