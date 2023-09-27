@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ShopFashion.ViewModels.Common;
 using ShopFashion.ViewModels.System.User;
-using ShopFashion.ViewModels.System.Users;
 using System.Net.Http.Headers;
 using System.Text;
 
@@ -93,5 +92,19 @@ public class UserApiClient : IUserApiClient
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
         return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
+    }
+
+    public async Task<ApiResult<bool>> Delete(Guid id)
+    {
+        var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+        var client = _httpClientFactory.CreateClient();
+        client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+        var response = await client.DeleteAsync($"/api/users/{id}");
+        var body = await response.Content.ReadAsStringAsync();
+        if (response.IsSuccessStatusCode)
+            return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(body);
+
+        return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(body);
     }
 }

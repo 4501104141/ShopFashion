@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using ShopFashion.AdminApp.Services;
 using ShopFashion.ViewModels.System.User;
-using ShopFashion.ViewModels.System.Users;
-using System.Text;
 
 namespace ShopFashion.AdminApp.Controllers;
 
@@ -19,7 +17,7 @@ public class UserController : BaseController
         _configuration = configuration;
     }
 
-    public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 1)
+    public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 5)
     {
         var request = new GetUserPagingRequest()
         {
@@ -103,5 +101,30 @@ public class UserController : BaseController
     {
         var result = await _userApiClient.GetById(id);
         return View(result.ResultObj);
+    }
+
+    [HttpGet]
+    public IActionResult Delete(Guid id)
+    {
+        return View(new UserDeleteRequest()
+        {
+            Id = id
+        });
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Delete(UserDeleteRequest request)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View();
+        }
+        var result = await _userApiClient.Delete(request.Id);
+        if (result.IsSuccessed)
+        {
+            return RedirectToAction("Index");
+        }
+        ModelState.AddModelError("", result.Message);
+        return View(request);
     }
 }

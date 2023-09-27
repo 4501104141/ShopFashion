@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace ShopFashion.ViewModels.System.Users;
+namespace ShopFashion.ViewModels.System.User;
 
 public class LoginRequestValidator : AbstractValidator<LoginRequest>
 {

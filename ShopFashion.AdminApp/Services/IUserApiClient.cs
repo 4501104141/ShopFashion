@@ -1,6 +1,5 @@
 ﻿using ShopFashion.ViewModels.Common;
 using ShopFashion.ViewModels.System.User;
-using ShopFashion.ViewModels.System.Users;
 
 namespace ShopFashion.AdminApp.Services
 {
@@ -11,5 +10,6 @@ namespace ShopFashion.AdminApp.Services
         Task<ApiResult<bool>> RegisterUser(RegisterRequest registerRequest);
         Task<ApiResult<bool>> UpdateUser(Guid id, UserUpdateRequest request);
         Task<ApiResult<UserVm>> GetById(Guid id);
+        Task<ApiResult<bool>> Delete(Guid id);
     }
 }
