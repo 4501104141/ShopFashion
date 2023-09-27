@@ -1,6 +1,5 @@
 ﻿using ShopFashion.ViewModels.Common;
 using ShopFashion.ViewModels.System.User;
-using ShopFashion.ViewModels.System.Users;
 using System;
 using System.Threading.Tasks;
 
@@ -13,4 +12,5 @@ public interface IUserService
     Task<ApiResult<bool>> Update(Guid id, UserUpdateRequest request);
     Task<ApiResult<PagedResult<UserVm>>> GetUsersPaging(GetUserPagingRequest request);
     Task<ApiResult<UserVm>> GetById(Guid id);
+    Task<ApiResult<bool>> Delete(Guid id);
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ShopFashion.ViewModels.System.Users;
+namespace ShopFashion.ViewModels.System.User;
 
 public class UserVm
 {

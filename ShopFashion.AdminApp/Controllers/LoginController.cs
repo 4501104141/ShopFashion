@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using ShopFashion.AdminApp.Services;
-using ShopFashion.ViewModels.System.Users;
+using ShopFashion.ViewModels.System.User;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;

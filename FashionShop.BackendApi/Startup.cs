@@ -16,7 +16,7 @@ using ShopFashion.Application.Common;
 using ShopFashion.Application.System.Users;
 using ShopFashion.Data.EF;
 using ShopFashion.Data.Entities;
-using ShopFashion.ViewModels.System.Users;
+using ShopFashion.ViewModels.System.User;
 using System.Collections.Generic;
 
 namespace FashionShop.BackendApi;

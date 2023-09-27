@@ -1,5 +1,5 @@
 ﻿
-namespace ShopFashion.ViewModels.System.Users;
+namespace ShopFashion.ViewModels.System.User;
 
 public class LoginRequest
 {

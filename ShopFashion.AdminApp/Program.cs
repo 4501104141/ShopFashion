@@ -1,7 +1,7 @@
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using ShopFashion.AdminApp.Services;
-using ShopFashion.ViewModels.System.Users;
+using ShopFashion.ViewModels.System.User;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.

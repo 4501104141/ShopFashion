@@ -5,7 +5,6 @@ using Microsoft.IdentityModel.Tokens;
 using ShopFashion.Data.Entities;
 using ShopFashion.ViewModels.Common;
 using ShopFashion.ViewModels.System.User;
-using ShopFashion.ViewModels.System.Users;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -82,12 +81,13 @@ public class UserService : IUserService
             PhoneNumber = request.PhoneNumber
         };
         var result = await _userManager.CreateAsync(user, request.Password);
-        if(result.Succeeded)
+        if (result.Succeeded)
         {
             return new ApiSuccessResult<bool>();
         }
         return new ApiErrorResult<bool>("Đăng ký không thành công");
     }
+
     public async Task<ApiResult<UserVm>> GetById(Guid id)
     {
         var user = await _userManager.FindByIdAsync(id.ToString());
@@ -107,6 +107,7 @@ public class UserService : IUserService
         };
         return new ApiSuccessResult<UserVm>(userVm);
     }
+
     public async Task<ApiResult<PagedResult<UserVm>>> GetUsersPaging(GetUserPagingRequest request)
     {
         var query = _userManager.Users;
@@ -157,5 +158,20 @@ public class UserService : IUserService
             return new ApiErrorResult<bool>("Cập nhật không thành công");
         }
         return new ApiSuccessResult<bool>();
+    }
+
+    public async Task<ApiResult<bool>> Delete(Guid id)
+    {
+        var user = await _userManager.FindByIdAsync(id.ToString());
+        if (user == null)
+        {
+            return new ApiErrorResult<bool>("User không tồn tại");
+        }
+        var reult = await _userManager.DeleteAsync(user);
+        if (reult.Succeeded)
+        {
+            return new ApiSuccessResult<bool>();
+        }
+        return new ApiErrorResult<bool>("Xóa không thành công");
     }
 }
