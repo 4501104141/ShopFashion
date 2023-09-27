@@ -1,18 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace ShopFashion.AdminApp.Controllers
+namespace ShopFashion.AdminApp.Controllers;
+
+[Authorize]
+public class BaseController : Controller
 {
-    public class BaseController : Controller
+    public override void OnActionExecuting(ActionExecutingContext context)
     {
-        public override void OnActionExecuting(ActionExecutingContext context)
+        var sessions = context.HttpContext.Session.GetString("Token");
+        if (sessions == null)
         {
-            var sessions = context.HttpContext.Session.GetString("Token");
-            if (sessions == null)
-            {
-                context.Result = new RedirectToActionResult("Index", "Login", null);
-            }
-            base.OnActionExecuting(context);
+            context.Result = new RedirectToActionResult("Index", "Login", null);
         }
+        base.OnActionExecuting(context);
     }
 }

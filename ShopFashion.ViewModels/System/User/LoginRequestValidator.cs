@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using ShopFashion.ViewModels.System.Users;
 
 namespace ShopFashion.ViewModels.System.Users;
 

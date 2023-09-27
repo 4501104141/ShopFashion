@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShopFashion.Application.System.Users;
 using ShopFashion.ViewModels.System.User;
 using ShopFashion.ViewModels.System.Users;
+using System;
+using System.Threading.Tasks;
 
 namespace ShopFashion.BackendApi.Controllers;
 
@@ -28,7 +29,7 @@ public class UsersController : ControllerBase
             return BadRequest(ModelState);
         }
         var resultToken = await _userService.Authencate(request);
-        if (string.IsNullOrEmpty(resultToken))
+        if (string.IsNullOrEmpty(resultToken.ResultObj))
         {
             return BadRequest("Username or password is incorrect.");
         }
@@ -44,7 +45,7 @@ public class UsersController : ControllerBase
             return BadRequest(ModelState);
         }
         var result = await _userService.Register(request);
-        if (!result)
+        if (!result.IsSuccessed)
         {
             return BadRequest("Register is unsuccessful.");
         }
@@ -57,5 +58,27 @@ public class UsersController : ControllerBase
     {
         var products = await _userService.GetUsersPaging(request);
         return Ok(products);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(Guid id, [FromBody] UserUpdateRequest request)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        var result = await _userService.Update(id, request);
+        if (!result.IsSuccessed)
+        {
+            return BadRequest(result);
+        }
+        return Ok(result);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(Guid id)
+    {
+        var user = await _userService.GetById(id);
+        return Ok(user);
     }
 }

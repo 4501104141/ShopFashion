@@ -263,7 +263,7 @@ public class ProductService : IProductService
     {
         var productImage = await _context.ProductImages.FindAsync(imageId);
         if (productImage == null)
-        { 
+        {
             throw new EShopException($"Cannot find an image with id {imageId}");
         }
         if (request.ImageFile != null)
