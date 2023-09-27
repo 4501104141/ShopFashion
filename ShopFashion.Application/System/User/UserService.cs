@@ -131,7 +131,9 @@ public class UserService : IUserService
         //4. Select and projection
         var pagedResult = new PagedResult<UserVm>()
         {
-            TotalRecord = totalRow,
+            TotalRecords = totalRow,
+            PageIndex = request.PageIndex,
+            PageSize = request.PageSize,
             Items = data
         };
         return new ApiSuccessResult<PagedResult<UserVm>>(pagedResult);

@@ -153,11 +153,12 @@ public class ProductService : IProductService
                 Stock = x.p.Stock,
                 ViewCount = x.p.ViewCount
             }).ToListAsync();
-
         //4. Select and projection
         var pagedResult = new PagedResult<ProductViewModel>()
         {
             TotalRecord = totalRow,
+            PageIndex = request.PageIndex,
+            PageSize = request.PageSize,
             Items = data
         };
         return pagedResult;
@@ -339,7 +340,9 @@ public class ProductService : IProductService
         //4. Select and projection
         var pagedResult = new PagedResult<ProductViewModel>()
         {
-            TotalRecord = totalRow,
+            TotalRecords = totalRow,
+            PageSize = request.PageSize,
+            PageIndex = request.PageIndex,
             Items = data
         };
         return pagedResult;

@@ -49,7 +49,7 @@ public class UsersController : ControllerBase
         {
             return BadRequest("Register is unsuccessful.");
         }
-        return Ok();
+        return Ok(result);
     }
 
     //http://localhost/api/users/paging?pageIndex=1&pageSize=10&keyword=
