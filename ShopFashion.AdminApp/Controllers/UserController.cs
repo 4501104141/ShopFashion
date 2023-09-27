@@ -97,4 +97,11 @@ public class UserController : BaseController
         HttpContext.Session.Remove("Token");
         return RedirectToAction("Login", "User");
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Details(Guid id)
+    {
+        var result = await _userApiClient.GetById(id);
+        return View(result.ResultObj);
+    }
 }

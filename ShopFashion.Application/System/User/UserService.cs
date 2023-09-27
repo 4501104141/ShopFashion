@@ -102,7 +102,8 @@ public class UserService : IUserService
             FirstName = user.FirstName,
             Dob = user.Dob,
             Id = user.Id,
-            LastName = user.LastName
+            LastName = user.LastName,
+            UserName = user.UserName
         };
         return new ApiSuccessResult<UserVm>(userVm);
     }
