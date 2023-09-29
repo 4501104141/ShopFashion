@@ -31,7 +31,6 @@ namespace ShopFashion.AdminApp.Services
             if (response.IsSuccessStatusCode)
             {
                 List<RoleVm> myDeserializedObjList = (List<RoleVm>)JsonConvert.DeserializeObject(body, typeof(List<RoleVm>));
-                var myDeserializedObjList2 = JsonConvert.DeserializeObject(body, typeof(List<RoleVm>));
                 return new ApiSuccessResult<List<RoleVm>>(myDeserializedObjList);
             }
             return JsonConvert.DeserializeObject<ApiErrorResult<List<RoleVm>>>(body);
