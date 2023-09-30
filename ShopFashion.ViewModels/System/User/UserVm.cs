@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ShopFashion.ViewModels.System.User;
@@ -24,4 +25,6 @@ public class UserVm
 
     [Display(Name = "Ngày sinh")]
     public DateTime Dob { get; set; }
+
+    public IList<string> Roles { get; set; }
 }
