@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ShopFashion.Utilities\ShopFashion.Utilities.csproj" />
     <ProjectReference Include="..\ShopFashion.ViewModels\ShopFashion.ViewModels.csproj" />
   </ItemGroup>
 

@@ -13,6 +13,7 @@ using Microsoft.OpenApi.Models;
 using ShopFahion.Utilities.Constants;
 using ShopFashion.Application.Catalog.Product;
 using ShopFashion.Application.Common;
+using ShopFashion.Application.System.Languages;
 using ShopFashion.Application.System.Roles;
 using ShopFashion.Application.System.Users;
 using ShopFashion.Data.EF;
@@ -47,6 +48,7 @@ public class Startup
         services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
         services.AddTransient<IUserService, UserService>();
         services.AddTransient<IRoleService, RoleService>();
+        services.AddTransient<ILanguageService, LanguageService>();
         services.AddControllers()
             .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
         services.AddSwaggerGen(c =>

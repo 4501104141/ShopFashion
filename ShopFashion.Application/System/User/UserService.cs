@@ -6,7 +6,6 @@ using ShopFashion.Data.Entities;
 using ShopFashion.ViewModels.Common;
 using ShopFashion.ViewModels.System.User;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -116,7 +115,7 @@ public class UserService : IUserService
         var query = _userManager.Users;
         if (!string.IsNullOrEmpty(request.Keyword))
         {
-            query = query.Where(x=> x.UserName.Contains(request.Keyword)
+            query = query.Where(x => x.UserName.Contains(request.Keyword)
              || x.PhoneNumber.Contains(request.Keyword));
         }
         //3. Paging
