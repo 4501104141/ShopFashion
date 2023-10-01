@@ -17,6 +17,7 @@ builder.Services.AddTransient<IUserApiClient, UserApiClient>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<IRoleApiClient, RoleApiClient>();
 builder.Services.AddTransient<ILanguageApiClient, LanguageApiClient>();
+builder.Services.AddTransient<IProductApiClient, ProductApiClient>();
 IMvcBuilder builder1 = builder.Services.AddRazorPages();
 var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 #if DEBUG
