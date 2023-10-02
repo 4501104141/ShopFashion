@@ -24,14 +24,14 @@ public class UserApiClient : IUserApiClient
         var json = JsonConvert.SerializeObject(request);
         var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
         var client = _httpClientFactory.CreateClient();
-        client.BaseAddress = new Uri("https://localhost:5001");
+        client.BaseAddress = new Uri(_configuration["BaseAddress"]);
         var response = await client.PostAsync("/api/users/authenticate", httpContent);
-        var token = await response.Content.ReadAsStringAsync();
-        if (!response.IsSuccessStatusCode)
+        var body = await response.Content.ReadAsStringAsync();
+        if (response.IsSuccessStatusCode)
         {
-            return JsonConvert.DeserializeObject<ApiErrorResult<string>>(await response.Content.ReadAsStringAsync());
+            return JsonConvert.DeserializeObject<ApiSuccessResult<string>>(body);
         }
-        return JsonConvert.DeserializeObject<ApiSuccessResult<string>>(await response.Content.ReadAsStringAsync());
+        return new ApiErrorResult<string>(body);
     }
 
     public async Task<ApiResult<UserVm>> GetById(Guid id)
