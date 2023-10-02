@@ -36,7 +36,7 @@ namespace ShopFashion.AdminApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(ModelState);
+                return View();
             }
             var result = await _userApiClient.Authenticate(request);
             if (result.ResultObj == null)
