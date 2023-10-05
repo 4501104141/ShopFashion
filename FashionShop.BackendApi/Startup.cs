@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ShopFahion.Utilities.Constants;
+using ShopFashion.Application.Catalog.Categories;
 using ShopFashion.Application.Catalog.Product;
 using ShopFashion.Application.Common;
 using ShopFashion.Application.System.Languages;
@@ -49,6 +50,7 @@ public class Startup
         services.AddTransient<IUserService, UserService>();
         services.AddTransient<IRoleService, RoleService>();
         services.AddTransient<ILanguageService, LanguageService>();
+        services.AddTransient<ICategoryService, CategoryService>();
         services.AddControllers()
             .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
         services.AddSwaggerGen(c =>
