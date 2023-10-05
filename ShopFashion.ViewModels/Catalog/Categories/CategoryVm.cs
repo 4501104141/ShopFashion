@@ -1,4 +1,5 @@
-﻿namespace ShopFashion.ViewModels.Catalog.Categories
+﻿
+namespace ShopFashion.ViewModels.Catalog.Categories
 {
     public class CategoryVm
     {
