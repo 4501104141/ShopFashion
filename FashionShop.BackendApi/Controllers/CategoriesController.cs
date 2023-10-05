@@ -1,24 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ShopFashion.Application.Catalog.Categories;
 using System.Threading.Tasks;
 
-namespace ShopFashion.BackendApi.Controllers;
-
-[Route("api/[controller]")]
-[ApiController]
-public class CategoriesController : ControllerBase
+namespace ShopFashion.BackendApi.Controllers
 {
-    private readonly ICategoryService _categoryService;
-
-    public CategoriesController(ICategoryService categoryService)
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize]
+    public class CategoriesController : ControllerBase
     {
-        _categoryService = categoryService;
-    }
+        private readonly ICategoryService _categoryService;
 
-    [HttpGet]
-    public async Task<IActionResult> GetAll(string languageId)
-    {
-        var products = await _categoryService.GetAll(languageId);
-        return Ok(products);
+        public CategoriesController(
+            ICategoryService categoryService)
+        {
+            _categoryService = categoryService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll(string languageId)
+        {
+            var products = await _categoryService.GetAll(languageId);
+            return Ok(products);
+        }
     }
 }

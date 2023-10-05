@@ -5,27 +5,28 @@ using Microsoft.EntityFrameworkCore;
 using ShopFashion.Data.EF;
 using ShopFashion.ViewModels.Catalog.Categories;
 
-namespace ShopFashion.Application.Catalog.Categories;
-
-public class CategoryService : ICategoryService
+namespace ShopFashion.Application.Catalog.Categories
 {
-    private readonly EShopDbContext _context;
-
-    public CategoryService(EShopDbContext context)
+    public class CategoryService : ICategoryService
     {
-        _context = context;
-    }
+        private readonly EShopDbContext _context;
 
-    public async Task<List<CategoryVm>> GetAll(string languageId)
-    {
-        var query = from c in _context.Categories
-                    join ct in _context.CategoryTranslations on c.Id equals ct.CategoryId
-                    where ct.LanguageId == languageId
-                    select new { c, ct };
-        return await query.Select(x => new CategoryVm()
+        public CategoryService(EShopDbContext context)
         {
-            Id = x.c.Id,
-            Name = x.ct.Name
-        }).ToListAsync();
+            _context = context;
+        }
+
+        public async Task<List<CategoryVm>> GetAll(string languageId)
+        {
+            var query = from c in _context.Categories
+                        join ct in _context.CategoryTranslations on c.Id equals ct.CategoryId
+                        where ct.LanguageId == languageId
+                        select new { c, ct };
+            return await query.Select(x => new CategoryVm()
+            {
+                Id = x.c.Id,
+                Name = x.ct.Name
+            }).ToListAsync();
+        }
     }
 }
