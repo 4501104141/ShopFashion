@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ShopFashion.ViewModels.Catalog.Products;
 
@@ -17,4 +18,5 @@ public class ProductVm
     public string SeoTitle { set; get; }
     public string SeoAlias { get; set; }
     public string LanguageId { set; get; }
+    public List<string> Categories { get; set; } = new List<string>();
 }
