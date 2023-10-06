@@ -132,6 +132,10 @@ public class ProductService : IProductService
         {
             query = query.Where(x => x.pt.Name.Contains(request.Keyword));
         }
+        if (request.CategoryId != null && request.CategoryId != 0)
+        {
+            query = query.Where(p => p.pic.CategoryId == request.CategoryId);
+        }
         //3. Paging
         int totalRow = await query.CountAsync();
         var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
