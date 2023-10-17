@@ -10,6 +10,7 @@ public class Product
     public decimal OriginalPrice { set; get; }
     public int Stock { set; get; }
     public int ViewCount { set; get; }
+    public bool? IsFeatured { get; set; }
     public DateTime DateCreated { set; get; }
     public List<ProductImage> ProductImages { get; set; }
     public List<ProductInCategory> ProductInCategories { get; set; }
