@@ -1,7 +1,8 @@
 ﻿using ShopFashion.ViewModels.Common;
 using ShopFashion.ViewModels.System.Languages;
 
-namespace ShopFashion.AdminApp.Services
+
+namespace ShopFashion.ApiIntegration
 {
     public interface ILanguageApiClient
     {

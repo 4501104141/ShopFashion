@@ -1,6 +1,10 @@
 ﻿using ShopFashion.ViewModels.Catalog.Categories;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 
-namespace ShopFashion.AdminApp.Services;
+
+
+namespace ShopFashion.ApiIntegration;
 
 public class CategoryApiClient : BaseApiClient, ICategoryApiClient
 {

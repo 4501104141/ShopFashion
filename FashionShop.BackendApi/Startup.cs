@@ -1,4 +1,3 @@
-using eShopSolution.Application.Common;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -10,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using ShopFahion.Utilities.Constants;
+using ShopFashion.Utilities.Constants;
 using ShopFashion.Application.Catalog.Categories;
 using ShopFashion.Application.Catalog.Product;
 using ShopFashion.Application.Common;
@@ -21,6 +20,7 @@ using ShopFashion.Data.EF;
 using ShopFashion.Data.Entities;
 using ShopFashion.ViewModels.System.User;
 using System.Collections.Generic;
+using ShopFashion.Application.Utilities;
 
 namespace FashionShop.BackendApi;
 
@@ -51,6 +51,7 @@ public class Startup
         services.AddTransient<IRoleService, RoleService>();
         services.AddTransient<ILanguageService, LanguageService>();
         services.AddTransient<ICategoryService, CategoryService>();
+        services.AddTransient<ISlideService, SlideService>();
         services.AddControllers()
             .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
         services.AddSwaggerGen(c =>

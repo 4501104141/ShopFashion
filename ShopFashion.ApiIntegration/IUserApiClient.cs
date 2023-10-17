@@ -1,7 +1,9 @@
 ﻿using ShopFashion.ViewModels.Common;
 using ShopFashion.ViewModels.System.User;
+using Microsoft.Extensions.Configuration;
 
-namespace ShopFashion.AdminApp.Services;
+
+namespace ShopFashion.ApiIntegration;
 
 public interface IUserApiClient
 {

@@ -1,11 +1,15 @@
-﻿using ShopFahion.Utilities.Constants;
+﻿using ShopFashion.Utilities.Constants;
 using ShopFashion.ViewModels.Catalog.Products;
 using ShopFashion.ViewModels.Common;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Text;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 
-namespace ShopFashion.AdminApp.Services;
+
+
+namespace ShopFashion.ApiIntegration;
 
 public class ProductApiClient : BaseApiClient, IProductApiClient
 {
@@ -85,6 +89,12 @@ public class ProductApiClient : BaseApiClient, IProductApiClient
     public async Task<ProductVm> GetById(int id, string languageId)
     {
         var data = await GetAsync<ProductVm>($"/api/products/{id}/{languageId}");
+        return data;
+    }
+
+    public async Task<List<ProductVm>> GetFeaturedProducts(string languageId, int take)
+    {
+        var data = await GetListAsync<ProductVm>($"/api/products/featured/{languageId}/{take}");
         return data;
     }
 }

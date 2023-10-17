@@ -21,4 +21,8 @@
     <Folder Include="wwwroot\themes\less\oregional\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ShopFashion.ApiIntegration\ShopFashion.ApiIntegration.csproj" />
+  </ItemGroup>
+
 </Project>

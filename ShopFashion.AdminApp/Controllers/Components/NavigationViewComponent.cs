@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ShopFahion.Utilities.Constants;
+using ShopFashion.Utilities.Constants;
 using ShopFashion.AdminApp.Models;
-using ShopFashion.AdminApp.Services;
+using ShopFashion.ApiIntegration;
 
 namespace ShopFashion.AdminApp.Controllers.Components
 {

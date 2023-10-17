@@ -1,5 +1,5 @@
 ﻿
-namespace ShopFahion.Utilities.Constants;
+namespace ShopFashion.Utilities.Constants;
 
 public class SystemConstants
 {
@@ -10,5 +10,9 @@ public class SystemConstants
         public const string DefaultLanguageId = "DefaultLanguageId";
         public const string Token = "Token";
         public const string BaseAddress = "BaseAddress";
+    }
+    public class ProductSettings
+    {
+        public const int NumberOfFeaturedProducts = 4;
     }
 }

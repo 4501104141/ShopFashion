@@ -1,6 +1,6 @@
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using ShopFashion.AdminApp.Services;
+using ShopFashion.ApiIntegration;
 using ShopFashion.ViewModels.System.User;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using ShopFahion.Utilities.Constants;
-using ShopFashion.AdminApp.Services;
+using ShopFashion.Utilities.Constants;
+using ShopFashion.ApiIntegration;
 using ShopFashion.ViewModels.Catalog.Products;
 using ShopFashion.ViewModels.Common;
 

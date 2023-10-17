@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopFashion.AdminApp", "Sho
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5D289AFD-01EB-43D1-98B9-0B33D569960A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopFashion.ApiIntegration", "ShopFashion.ApiIntegration\ShopFashion.ApiIntegration.csproj", "{4454432E-2B88-4E7F-A3A2-753FB5530122}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{BE182168-E058-43A8-B920-FE7FB2D5E402}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE182168-E058-43A8-B920-FE7FB2D5E402}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE182168-E058-43A8-B920-FE7FB2D5E402}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4454432E-2B88-4E7F-A3A2-753FB5530122}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4454432E-2B88-4E7F-A3A2-753FB5530122}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4454432E-2B88-4E7F-A3A2-753FB5530122}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4454432E-2B88-4E7F-A3A2-753FB5530122}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

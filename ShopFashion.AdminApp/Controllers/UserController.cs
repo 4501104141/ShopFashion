@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using ShopFashion.AdminApp.Services;
+using ShopFashion.ApiIntegration;
 using ShopFashion.ViewModels.Common;
 using ShopFashion.ViewModels.System.User;
 
