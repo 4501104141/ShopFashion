@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ShopFahion.Utilities.Constants;
+using ShopFashion.Utilities.Constants;
 using ShopFashion.AdminApp.Models;
 using System.Diagnostics;
 

@@ -1,4 +1,3 @@
-using eShopSolution.Application.Common;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -10,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using ShopFahion.Utilities.Constants;
+using ShopFashion.Utilities.Constants;
 using ShopFashion.Application.Catalog.Categories;
 using ShopFashion.Application.Catalog.Product;
 using ShopFashion.Application.Common;

@@ -3,8 +3,12 @@ using ShopFashion.ViewModels.Common;
 using ShopFashion.ViewModels.System.User;
 using System.Net.Http.Headers;
 using System.Text;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 
-namespace ShopFashion.AdminApp.Services;
+
+
+namespace ShopFashion.ApiIntegration;
 
 public class UserApiClient : IUserApiClient
 {

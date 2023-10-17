@@ -1,7 +1,11 @@
 ﻿using ShopFashion.ViewModels.Common;
 using ShopFashion.ViewModels.System.Languages;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 
-namespace ShopFashion.AdminApp.Services;
+
+
+namespace ShopFashion.ApiIntegration;
 
 public class LanguageApiClient : BaseApiClient, ILanguageApiClient
 {

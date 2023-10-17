@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Hosting;
-using ShopFashion.Application.Common;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace eShopSolution.Application.Common;
+namespace ShopFashion.Application.Common;
 
 public class FileStorageService : IStorageService
 {

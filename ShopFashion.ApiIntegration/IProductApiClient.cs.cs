@@ -1,7 +1,8 @@
 ﻿using ShopFashion.ViewModels.Catalog.Products;
 using ShopFashion.ViewModels.Common;
 
-namespace ShopFashion.AdminApp.Services;
+
+namespace ShopFashion.ApiIntegration;
 
 public interface IProductApiClient
 {

@@ -1,6 +1,7 @@
 ﻿using ShopFashion.ViewModels.Catalog.Categories;
 
-namespace ShopFashion.AdminApp.Services;
+
+namespace ShopFashion.ApiIntegration;
 
 public interface ICategoryApiClient
 {

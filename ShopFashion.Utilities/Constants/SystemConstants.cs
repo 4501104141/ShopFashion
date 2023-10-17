@@ -1,5 +1,5 @@
 ﻿
-namespace ShopFahion.Utilities.Constants;
+namespace ShopFashion.Utilities.Constants;
 
 public class SystemConstants
 {

@@ -1,8 +1,10 @@
-﻿using Newtonsoft.Json;
-using ShopFahion.Utilities.Constants;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using ShopFashion.Utilities.Constants;
 using System.Net.Http.Headers;
 
-namespace ShopFashion.AdminApp.Services;
+namespace ShopFashion.ApiIntegration;
 
 public class BaseApiClient
 {

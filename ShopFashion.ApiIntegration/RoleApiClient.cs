@@ -2,8 +2,12 @@
 using ShopFashion.ViewModels.Common;
 using ShopFashion.ViewModels.System.User.Roles;
 using System.Net.Http.Headers;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 
-namespace ShopFashion.AdminApp.Services;
+
+
+namespace ShopFashion.ApiIntegration;
 
 public class RoleApiClient : IRoleApiClient
 {
