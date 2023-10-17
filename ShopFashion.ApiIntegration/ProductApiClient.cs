@@ -91,4 +91,10 @@ public class ProductApiClient : BaseApiClient, IProductApiClient
         var data = await GetAsync<ProductVm>($"/api/products/{id}/{languageId}");
         return data;
     }
+
+    public async Task<List<ProductVm>> GetFeaturedProducts(string languageId, int take)
+    {
+        var data = await GetListAsync<ProductVm>($"/api/products/featured/{languageId}/{take}");
+        return data;
+    }
 }

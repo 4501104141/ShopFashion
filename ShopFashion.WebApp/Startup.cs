@@ -1,11 +1,14 @@
 using LazZiya.ExpressLocalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ShopFashion.ApiIntegration;
 using ShopFashion.WebApp.LocalizationResources;
+using System;
 using System.Globalization;
 
 namespace ShopFashion.WebApp;
@@ -22,6 +25,7 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddHttpClient();
         var cultures = new[]
            {
                 new CultureInfo("en"),
@@ -56,6 +60,13 @@ public class Startup
                     o.DefaultRequestCulture = new RequestCulture("vi");
                 };
             }); ;
+        services.AddSession(options =>
+        {
+            options.IdleTimeout = TimeSpan.FromMinutes(30);
+        });
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        services.AddTransient<ISlideApiClient, SlideApiClient>();
+        services.AddTransient<IProductApiClient, ProductApiClient>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +85,7 @@ public class Startup
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();
+        app.UseSession();
         app.UseAuthorization();
         app.UseEndpoints(endpoints =>
         {

@@ -23,4 +23,5 @@ public interface IProductService
     Task<List<ProductImageViewModel>> GetListImages(int productId);
     Task<PagedResult<ProductVm>> GetAllByCategoryId(string languageId, GetPublicProductPagingRequest request);
     Task<ApiResult<bool>> CategoryAssign(int id, CategoryAssignRequest request);
+    Task<List<ProductVm>> GetFeaturedProducts(string languageId, int take);
 }
