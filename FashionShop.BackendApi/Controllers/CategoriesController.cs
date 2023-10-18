@@ -19,6 +19,7 @@ namespace ShopFashion.BackendApi.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAll(string languageId)
         {
             var products = await _categoryService.GetAll(languageId);
