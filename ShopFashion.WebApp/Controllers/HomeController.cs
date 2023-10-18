@@ -30,11 +30,12 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var culture = CultureInfo.CurrentCulture.Name;
+        var culture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
         var viewModel = new HomeViewModel
         {
             Slides = await _slideApiClient.GetAll(),
-            FeaturedProducts = await _productApiClient.GetFeaturedProducts(culture, SystemConstants.ProductSettings.NumberOfFeaturedProducts)
+            FeaturedProducts = await _productApiClient.GetFeaturedProducts(culture, SystemConstants.ProductSettings.NumberOfFeaturedProducts),
+            LatestProducts = await _productApiClient.GetLatestProducts(culture, SystemConstants.ProductSettings.NumberOfLatestProducts)
         };
         return View(viewModel);
     }
