@@ -30,7 +30,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var culture = CultureInfo.CurrentCulture.Name;
+        var culture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
         var viewModel = new HomeViewModel
         {
             Slides = await _slideApiClient.GetAll(),
