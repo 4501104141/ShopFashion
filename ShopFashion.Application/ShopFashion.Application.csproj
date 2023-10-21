@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Ulitilies\**" />
+    <EmbeddedResource Remove="Ulitilies\**" />
+    <None Remove="Ulitilies\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShopFashion.Data\ShopFashion.Data.csproj" />
+    <ProjectReference Include="..\ShopFashion.Utilities\ShopFashion.Utilities.csproj" />
+    <ProjectReference Include="..\ShopFashion.ViewModels\ShopFashion.ViewModels.csproj" />
+    <ProjectReference Include="..\ShopFashion.WebApp\ShopFashion.WebApp.csproj" />
+  </ItemGroup>
+
+</Project>
